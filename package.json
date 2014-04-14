@@ -1,6 +1,6 @@
 {
   "name": "elroy-hue-driver",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Elroy hue driver",
   "main": "hue_scout.js",
   "scripts": {

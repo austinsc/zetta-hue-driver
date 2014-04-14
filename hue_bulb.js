@@ -32,24 +32,22 @@ HueBulbDriver.prototype.blink = function(cb){
 
 HueBulbDriver.prototype.turnOn = function(cb) {
   var self = this;
+  self.state = 'on';
   var state = lightState.create().on();
   this.hue.setLightState(this.data.id,state,function(err){
     if(err)
       return cb(err);
-
-    self.state = 'on';
     cb();  
   });
 };
 
 HueBulbDriver.prototype.turnOff = function(cb) {
   var self = this;
+  self.state = 'off';
   var state = lightState.create().off();
   this.hue.setLightState(this.data.id,state,function(err){
     if(err)
       return cb(err);
-
-    self.state = 'off';
     cb();  
   });
 };
