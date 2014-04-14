@@ -1,7 +1,7 @@
 var HueApi = require("node-hue-api").HueApi;
 var async = require('async');
 var HueBulbDriver = require('./hue_bulb');
-var Scientist = require("elroy/scientist");
+var Scientist = require("zetta/scientist");
 var lightState = require("node-hue-api").lightState;
 
 var HueHubDriver = module.exports = function(data,_newLightFunc) {

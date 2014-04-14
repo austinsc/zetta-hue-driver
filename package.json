@@ -1,7 +1,7 @@
 {
-  "name": "elroy-hue-driver",
+  "name": "zetta-hue-driver",
   "version": "0.0.4",
-  "description": "Elroy hue driver",
+  "description": "Zetta hue driver",
   "main": "hue_scout.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,6 @@
   "dependencies": {
     "node-hue-api": "^0.2.2",
     "async": "^0.7.0",
-    "elroy": "0.0.14"
+    "zetta": "0.0.14"
   }
 }
