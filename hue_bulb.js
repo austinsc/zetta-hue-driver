@@ -11,13 +11,14 @@ var HueBulbDriver = module.exports = function(data,hue) {
 
 HueBulbDriver.prototype.init = function(config) {
   config
-    .when('on', { allow: ['turn-off', 'toggle','blink'] })
-    .when('off', { allow: ['turn-on', 'toggle','blink'] })
-    .when('blink', { allow: ['turn-on', 'toggle','blink'] })
+    .when('on', { allow: ['turn-off', 'toggle','blink','color'] })
+    .when('off', { allow: ['turn-on', 'toggle','blink','color'] })
+    .when('blink', { allow: ['turn-on', 'toggle','blink','color'] })
     .map('turn-on', this.turnOn)
     .map('turn-off', this.turnOff)
     .map('toggle', this.toggle)
-    .map('blink',this.blink);
+    .map('blink',this.blink)
+    .map('color',this.color,[{type:'color',name : 'color'}]);
 };
 
 HueBulbDriver.prototype.blink = function(cb){
@@ -26,6 +27,16 @@ HueBulbDriver.prototype.blink = function(cb){
   this.state = 'blink';
   this.hue.setLightState(this.data.id,{alert : 'select'},function(err){
     self.state = prevState;
+    cb();
+  });
+};
+
+
+HueBulbDriver.prototype.color = function(color,cb){
+  color = color.match(/[0-9a-f]{1,2}/g).map(function(c){ return parseInt(c,16); });
+  var self = this;
+  var state = lightState.create().on().rgb(color[0],color[1],color[2]);
+  this.hue.setLightState(this.data.id,state,function(err){
     cb();
   });
 };
