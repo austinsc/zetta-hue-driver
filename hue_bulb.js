@@ -22,17 +22,20 @@ HueBulbDriver.prototype.init = function(config) {
 };
 
 HueBulbDriver.prototype.blink = function(cb){
-  var prevState = this.state;
+  if(!this.hue)
+    return cb();
+
   var self = this;
-  this.state = 'blink';
   this.hue.setLightState(this.data.id,{alert : 'select'},function(err){
-    self.state = prevState;
     cb();
   });
 };
 
 
 HueBulbDriver.prototype.color = function(color,cb){
+  if(!this.hue)
+    return cb();
+
   color = color.match(/[0-9a-f]{1,2}/g).map(function(c){ return parseInt(c,16); });
   var self = this;
   var state = lightState.create().on().rgb(color[0],color[1],color[2]);
@@ -42,6 +45,9 @@ HueBulbDriver.prototype.color = function(color,cb){
 };
 
 HueBulbDriver.prototype.turnOn = function(cb) {
+  if(!this.hue)
+    return cb();
+
   var self = this;
   self.state = 'on';
   var state = lightState.create().on();
@@ -53,12 +59,15 @@ HueBulbDriver.prototype.turnOn = function(cb) {
 };
 
 HueBulbDriver.prototype.turnOff = function(cb) {
+  if(!this.hue)
+    return cb();
+
   var self = this;
   self.state = 'off';
   var state = lightState.create().off();
   this.hue.setLightState(this.data.id,state,function(err){
     if(err)
-      return cb(err);
+      return cb();
     cb();  
   });
 };

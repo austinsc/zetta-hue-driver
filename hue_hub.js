@@ -27,7 +27,8 @@ HueHubDriver.prototype.init = function(config) {
     .map('blink', this.blink)
     .map('all-on',this.allOn)
     .map('all-off',this.allOff)
-    .map('find-lights',this.findLights);
+    .map('find-lights',this.findLights)
+    .map('color',this.color,[{type:'color',name : 'color'}]);
 };
 
 HueHubDriver.prototype.register = function(cb) {
@@ -35,7 +36,7 @@ HueHubDriver.prototype.register = function(cb) {
   var hue = new HueApi();
   hue.createUser(this.data.ipaddress, null, null, function(err, user) {
     if (err)
-      return cb(err);
+      return cb(null);
 
     self.data.user = user;
     self.data.registered = true;
@@ -47,26 +48,45 @@ HueHubDriver.prototype.register = function(cb) {
   });
 };
 
-HueHubDriver.prototype.blink = function(cb) {
-  var prevState = this.state;
+HueHubDriver.prototype.color = function(color,cb){
+  if(!this.hue)
+    return cb();
+
+  color = color.match(/[0-9a-f]{1,2}/g).map(function(c){ return parseInt(c,16); });
   var self = this;
-  this.state = "blinking";
+  var state = lightState.create().on().rgb(color[0],color[1],color[2]);
+  this.hue.setLightState(this.data.id,state,function(err){
+    cb();
+  });
+};
+
+
+HueHubDriver.prototype.blink = function(cb) {
+  if(!this.hue)
+    return cb();
+
+  var self = this;
   self.hue.setGroupLightState(0, {alert : "select"},function(){
-    self.state = prevState;
     cb();
   });
 };
 
 HueHubDriver.prototype.allOn = function(cb) {
+  if(!this.hue)
+    return cb();
+
   this.data.lightval = 'on';
   var state = lightState.create().on();
-  this.hue.setGroupLightState(0,state,cb);
+  this.hue.setGroupLightState(0,state,function(){});
 };
 
 HueHubDriver.prototype.allOff = function(cb) {
+  if(!this.hue)
+    return cb();
+
   this.data.lightval = 'off';
   var state = lightState.create().off();
-  this.hue.setGroupLightState(0,state,cb);
+  this.hue.setGroupLightState(0,state,function(){});
 };
 
 HueHubDriver.prototype._lightExists = function(light) {
@@ -76,11 +96,14 @@ HueHubDriver.prototype._lightExists = function(light) {
 };
 
 HueHubDriver.prototype.findLights = function(cb) {
+  if(!this.hue)
+    return cb();
+
   var self = this;
 
   this.hue.lights(function(err, res) {
     if (err)
-      return cb(err);
+      return cb();
 
     res.lights.forEach(function(light){
       if(self._lightExists(light))
