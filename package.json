@@ -11,6 +11,6 @@
   "dependencies": {
     "node-hue-api": "^0.2.2",
     "async": "^0.7.0",
-    "zetta": "0.0.2"
+    "zetta-runtime": ">0.0.12"
   }
 }
