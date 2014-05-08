@@ -3,14 +3,16 @@ var hue = require("node-hue-api"),
     lightState = hue.lightState;
 
 
-var host = "192.168.1.26",
+var host = "10.0.0.142",
     username = "34924aa3c87df0f23e6f79b3539ae87",
     api = new HueApi(host, username),
     state;
 
 //var state = lightState.create().alert().transition(0);
-//var state = {alert : 'select'};
-//api.setGroupLightState(0,state,function(err){});
+var state = {alert : 'select'};
+api.setGroupLightState(0,state,function(err){});
+
+return;
 
 
 var onState = {transitiontime: 0, on: true, bri: 100};
@@ -31,7 +33,9 @@ function on(cb){
 
 on(function(){
   setTimeout(function(){
-    off(function(){});
+    off(function(){
+      setTimeout(on,200)
+    });
   },200);
 });
 
