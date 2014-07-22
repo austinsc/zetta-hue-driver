@@ -1,16 +1,31 @@
 {
   "name": "zetta-hue-driver",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Zetta hue driver",
-  "main": "hue_scout.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Adam Magaluk <AdamMagaluk@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "node-hue-api": "^0.2.2",
-    "async": "^0.7.0",
-    "zetta-runtime": ">0.0.12"
-  }
+    "zetta": ">0.0.13"
+  },
+  "keywords": [
+    "zetta",
+    "hue"
+  ],
+  "directories": {
+    "example": "examples"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zettajs/zetta-hue-driver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zettajs/zetta-hue-driver/issues"
+  },
+  "homepage": "https://github.com/zettajs/zetta-hue-driver"
 }
