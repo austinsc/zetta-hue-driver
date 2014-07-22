@@ -2,8 +2,8 @@ var util = require('util')
   , Scout = require('zetta').Scout
   , hue = require("node-hue-api")
   , HueApi = require("node-hue-api").HueApi
-  , HueHubDriver = require('./hue_hub')
-  , HueBulbDriver = require('./hue_bulb');
+  , HueHubDriver = require('./hub')
+  , HueBulbDriver = require('./bulb');
 
 var HueScout = module.exports = function() {
   this.interval = 15000;
