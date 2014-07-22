@@ -146,7 +146,7 @@ HueHub.prototype.findLights = function(cb) {
     }
 
     res.lights.forEach(function(light) {
-      self.onDiscoveredLight(light, this._hue);
+      self.onDiscoveredLight(light, self._hue);
     });
 
     cb();
