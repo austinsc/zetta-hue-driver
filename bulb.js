@@ -15,7 +15,7 @@ HueBulb.prototype.init = function(config) {
   config
     .state('off')
     .type('huebulb')
-    .name('Hue Hulb ' + this.bulbName);
+    .name('Hue Bulb ' + this.bulbName);
 };
 
 HueBulb.prototype.setState = function(state, cb) {

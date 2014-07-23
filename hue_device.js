@@ -26,7 +26,6 @@ HueDevice.prototype._init = function(config) {
 };
 
 HueDevice.prototype.blink = function(cb) {
-  console.log('blink')
   this.setState({alert : "select"}, function(){
     cb();
   });
