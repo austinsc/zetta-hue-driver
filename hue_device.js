@@ -79,7 +79,7 @@ HueDevice.prototype.toggle = function(cb) {
 
 HueDevice.prototype.brightness = function(brightness, cb) {
   var state = lightState.create().brightness(brightness);
-  this.setLightState(state, function(err) {
+  this.setState(state, function(err) {
     cb();
   });
 };
