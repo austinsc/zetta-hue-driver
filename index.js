@@ -20,15 +20,12 @@ HueScout.prototype.init = function(next) {
 
 HueScout.prototype.search = function() {
   var self = this;
-  hue.locateBridges(function(err, hubs) {
-    if (err){
-      console.error(err);
-      return;
-    }
+
+  hue.searchForBridges(2000).then(function(hubs) {
     hubs.forEach(function(hueHub){
       self.foundHub(hueHub);
     });
-  });
+  }).done();
 };
 
 HueScout.prototype.foundHub = function(data) {
