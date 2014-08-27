@@ -1,6 +1,6 @@
 {
   "name": "zetta-hue-driver",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Zetta hue driver",
   "main": "index.js",
   "scripts": {
