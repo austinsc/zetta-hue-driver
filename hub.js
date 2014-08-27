@@ -63,15 +63,17 @@ HueHub.prototype.findLights = function(cb) {
   }
 
   var self = this;
-  this._hue.lights(function(err, res) {
-    if (err) {
+  
+  this._hue.lights()
+    .then(function(res) {
+      res.lights.forEach(function(light) {
+        self.onDiscoveredLight(light, self._hue);
+      });
+      cb();
+    })
+    .fail(function(err) {
+      console.error('Hue Find Lights:', err);
       return cb();
-    }
-
-    res.lights.forEach(function(light) {
-      self.onDiscoveredLight(light, self._hue);
-    });
-
-    cb();
-  });
+    })
+    .done();
 };
