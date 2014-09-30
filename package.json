@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "node-hue-api": "^0.2.2",
-    "zetta": ">0.0.13"
+    "zetta-device": "^0.3.0",
+    "zetta-scout": "^0.3.0"
   },
   "keywords": [
     "zetta",

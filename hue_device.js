@@ -1,5 +1,5 @@
 var util = require('util');
-var Device = require('zetta').Device;
+var Device = require('zetta-device');
 var lightState = require('node-hue-api').lightState;
 
 var HueDevice = module.exports = function(hue) {

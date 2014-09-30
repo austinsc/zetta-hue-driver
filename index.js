@@ -1,5 +1,5 @@
 var util = require('util')
-  , Scout = require('zetta').Scout
+  , Scout = require('zetta-scout')
   , hue = require("node-hue-api")
   , HueApi = require("node-hue-api").HueApi
   , HueHubDriver = require('./hub')
@@ -21,10 +21,11 @@ HueScout.prototype.init = function(next) {
 HueScout.prototype.search = function() {
   var self = this;
 
-  hue.searchForBridges(2000).then(function(hubs) {
-    hubs.forEach(function(hueHub){
-      self.foundHub(hueHub);
-    });
+  hue.locateBridges(5000).then(function(hubs) {
+    hubs.forEach(self.foundHub.bind(self));
+    hue.searchForBridges(5000).then(function(hubs2) {
+      hubs.forEach(self.foundHub.bind(self));
+    }).done();
   }).done();
 };
 
