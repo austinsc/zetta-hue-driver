@@ -15,12 +15,8 @@ var zetta = require('zetta');
 var Hue = require('zetta-hue-driver');
 
 zetta()
-  .expose('*')
   .use(Hue)
-  .listen(3000, function(err) {
-    console.log('Listening on http://localhost:3000/');
-  });
-
+  .listen(1337);
 ```
 
 ## License
