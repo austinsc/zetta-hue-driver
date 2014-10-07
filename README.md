@@ -19,6 +19,16 @@ zetta()
   .listen(1337);
 ```
 
+## Register your hub
+
+As a security measure, you must register your hub in order for the `zetta-hue-driver` to find your connected bulbs. 
+
+To do this: 
+  1. push the `link` button on top of your hue hub 
+    * the same physical button you pushed when you linked your hub to your mobile app or web account 
+  2. trigger the `regiser` action in the zetta api. 
+    * You'll have 10-20 seconds to do this before the api times out.   
+
 ## License
 
 MIT
