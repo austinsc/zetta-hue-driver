@@ -32,7 +32,7 @@ HueDevice.prototype.blink = function(cb) {
 };
 
 HueDevice.prototype.color = function(color, cb) {
-  color = color.match(/[0-9a-f]{1,2}/g).map(function(c){ return parseInt(c,16); });
+  color = Color(color).rgbArray();
   var self = this;
   var state = lightState.create().on().rgb(color[0], color[1], color[2]);
   this.setState(state, function(err) {
@@ -61,7 +61,7 @@ HueDevice.prototype.turnOff = function(cb) {
     if(!err) {
       self.state = 'off';
     }
-    cb();  
+    cb();
   });
 };
 
@@ -94,4 +94,3 @@ HueDevice.prototype.colorLoop = function(cb) {
     cb();
   });
 };
-
