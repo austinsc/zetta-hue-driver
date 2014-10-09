@@ -11,7 +11,8 @@
   "dependencies": {
     "node-hue-api": "^0.2.2",
     "zetta-device": "^0.3.0",
-    "zetta-scout": "^0.3.0"
+    "zetta-scout": "^0.3.0",
+    "color": "~0.7.1"
   },
   "keywords": [
     "zetta",
