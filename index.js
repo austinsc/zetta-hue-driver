@@ -25,8 +25,8 @@ HueScout.prototype.search = function() {
     hubs.forEach(self.foundHub.bind(self));
     hue.searchForBridges(5000).then(function(hubs2) {
       hubs.forEach(self.foundHub.bind(self));
-    }).done();
-  }).done();
+    }).fail(function(){}).done();
+  }).fail(function(){}).done();
 };
 
 HueScout.prototype.foundHub = function(data) {
