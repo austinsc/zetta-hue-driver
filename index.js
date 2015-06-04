@@ -21,9 +21,9 @@ HueScout.prototype.init = function(next) {
 HueScout.prototype.search = function() {
   var self = this;
 
-  hue.locateBridges(5000).then(function(hubs) {
+  hue.nupnpSearch(5000).then(function(hubs) {
     hubs.forEach(self.foundHub.bind(self));
-    hue.searchForBridges(5000).then(function(hubs2) {
+    hue.upnpSearch(5000).then(function(hubs2) {
       hubs.forEach(self.foundHub.bind(self));
     }).fail(function(){}).done();
   }).fail(function(){}).done();
